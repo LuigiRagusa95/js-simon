@@ -29,24 +29,7 @@ const allowOnlyNumber = (input) =>
 
 const validateNumber = (number) => (parseInt(number) === actualNumber ? true : false);
 
-const confirm = (input, button) => {
-    button.addEventListener('click', () => {
-        console.log(input.value);
-        if (validateNumber(input.value)) {
-            showPopUp(false);
-            message(`Complimenti hai vinto! Il numero da ricordare era ${actualNumber}`);
-            input.value = '';
-            canPlay = true;
-        } else {
-            showPopUp(false);
-            message(`Hai perso! Il numero da ricordare era ${actualNumber} e tu ${input.value === '' ? 'non hai inserito nessun valore' : `hai inserito ${input.value}`}`);
-            input.value = '';
-            canPlay = true;
-        }
-    });
-};
-
-startBtn.addEventListener('click', (event) => {
+startBtn.addEventListener('click', () => {
     if (canPlay) {
         canPlay = false;
         timerEl.classList.add('active');
@@ -64,7 +47,6 @@ startBtn.addEventListener('click', (event) => {
                 resetTimer(5);
                 showPopUp(true);
                 allowOnlyNumber(inputField);
-                confirm(inputField, confirmBtn);
                 startBtn.textContent = `Restart`;
                 startBtn.classList.add('active');
                 timerEl.classList.remove('active');
@@ -72,4 +54,18 @@ startBtn.addEventListener('click', (event) => {
             }
         }, 1000);
     }
+});
+
+confirmBtn.addEventListener('click', () => {
+    console.log(inputField.value);
+    if (validateNumber(inputField.value)) {
+        showPopUp(false);
+        message(`Complimenti hai vinto! Il numero da ricordare era ${actualNumber}`);
+        inputField.value = '';
+    } else {
+        showPopUp(false);
+        message(`Hai perso! Il numero da ricordare era ${actualNumber} e tu ${inputField.value === '' ? 'non hai inserito nessun valore' : `hai inserito ${inputField.value}`}`);
+        inputField.value = '';
+    }
+    canPlay = true;
 });
