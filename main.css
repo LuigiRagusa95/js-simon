@@ -31,7 +31,7 @@ input[text] {
     user-select: none; /* No cheat 😜 */
 }
 
-#number-field {
+#number-text {
     margin: 1rem;
     font-weight: 600;
     font-size: 1.5rem;
@@ -97,14 +97,20 @@ input[text] {
 }
 
 .small-text {
-    display: flex;
+    display: none;
+    font-size: 1rem;
     margin-top: 0.25rem;
-    font-size: 0.875rem;
     line-height: 1.5rem;
 }
 
+#start-btn {
+    display: none;
+}
+#start-btn.active {
+    display: flex;
+}
+
 .popup.active,
-.button.active,
 .small-text.active {
     display: flex;
 }
