@@ -47,8 +47,9 @@ startBtn.addEventListener('click', () => {
                 message('');
                 resetTimer(5);
                 showPopUp(true);
+                inputField.focus();
                 allowOnlyNumber(inputField);
-                startBtn.textContent = `Restart`;
+                startBtn.textContent = `Riprova`;
                 startBtn.classList.add('active');
                 timerEl.classList.remove('active');
                 clearInterval(time);
@@ -63,10 +64,10 @@ function fancyChecker(arr1, arr2) {
     let incorrect = 0;
     for (let i = 0; i < numLength; i++) {
         if (arr1[i] === arr2[i]) {
-            correct = i + 1;
+            correct += String(i + 1).length;
             string += `<span class="t-correct">${arr2[i]}</span>`;
         } else {
-            incorrect = i + 1;
+            incorrect += String(i + 1).length;
             string += `<span class="t-incorrect">${arr2[i]}</span>`;
         }
     }
