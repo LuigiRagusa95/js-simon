@@ -86,17 +86,19 @@ function giveMeTheMessage(value) {
 
 confirmBtn.addEventListener('click', () => {
     const v = fancyChecker(String(actualNumber).split(''), String(inputField.value).split(''));
-    console.log(v.correct);
-    if (validateNumber(inputField.value)) {
-        showPopUp(false);
-        message(`Complimenti hai vinto! Il numero da ricordare era ${v.string}`);
-        inputField.value = '';
-    } else {
-        showPopUp(false);
-        giveMeTheMessage(v);
-        inputField.value = '';
+    if (inputField.value === '') return;
+    else if (inputField.value !== '' && inputField.value.length >= numLength) {
+        if (validateNumber(inputField.value)) {
+            showPopUp(false);
+            message(`Complimenti hai vinto! Il numero da ricordare era ${v.string}`);
+            inputField.value = '';
+        } else {
+            showPopUp(false);
+            giveMeTheMessage(v);
+            inputField.value = '';
+        }
+        canPlay = true;
     }
-    canPlay = true;
 });
 
 inputField.addEventListener('input', () => {
