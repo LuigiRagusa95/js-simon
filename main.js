@@ -6,7 +6,7 @@ const confirmBtn = document.getElementById('confirm-btn');
 const inputField = document.getElementById('input-field');
 const numberText = document.getElementById('number-text');
 
-let timer = 5;
+let timer = 30;
 let numLength = 5;
 let canPlay = true;
 let actualNumber = 0;
@@ -20,7 +20,7 @@ const randomInt = (length) => Math.floor(Math.random() * (9 * Math.pow(10, lengt
 const showPopUp = (status) => (status === true ? popUpEl.classList.add('active') : popUpEl.classList.remove('active'));
 const allowOnlyNumber = (input) =>
     input.addEventListener('keydown', (event) => {
-        var charCode = event.which ? event.which : event.keyCode;
+        let charCode = event.which ? event.which : event.keyCode;
         if (charCode > 31 && (charCode < 48 || charCode > 57)) {
             event.preventDefault();
         }
