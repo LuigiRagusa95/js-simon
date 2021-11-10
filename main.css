@@ -103,10 +103,12 @@ input[text] {
     line-height: 1.5rem;
 }
 
-#start-btn {
+#start-btn,
+#restart-btn {
     display: none;
 }
-#start-btn.active {
+#start-btn.active,
+#restart-btn.active {
     display: flex;
 }
 
