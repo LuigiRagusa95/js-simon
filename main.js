@@ -45,7 +45,7 @@ startBtn.addEventListener('click', () => {
             timerEl.textContent = `Tempo: ${timer}`;
             if (timer === 0) {
                 message('');
-                resetTimer(5);
+                resetTimer(30);
                 showPopUp(true);
                 inputField.focus();
                 allowOnlyNumber(inputField);
