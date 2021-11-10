@@ -1,0 +1,110 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.game {
+    display: flex;
+    user-select: none;
+    align-items: center;
+    flex-direction: column;
+}
+
+input[text] {
+    user-select: none; /* No cheat 😜 */
+}
+
+#number-field {
+    margin: 1rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #ffffff;
+    appearance: none;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.125rem;
+    background-color: #57a4f4;
+}
+
+/* popup */
+.popup {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup .popup-container {
+    display: flex;
+    padding: 1rem;
+    min-width: 20rem;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 0.125rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.popup .popup-container h3 {
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    line-height: 1.75rem;
+}
+
+.popup .popup-container input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    appearance: none;
+    line-height: 1.5rem;
+    padding: 0.125rem 0.5rem;
+    background-color: #e5e5e5;
+}
+
+.popup .popup-container .button {
+    align-self: flex-end;
+}
+
+.small-text {
+    display: flex;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+}
+
+.popup.active,
+.button.active,
+.small-text.active {
+    display: flex;
+}
