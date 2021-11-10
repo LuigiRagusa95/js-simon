@@ -7,12 +7,14 @@ const inputField = document.getElementById('input-field');
 const numberText = document.getElementById('number-text');
 
 let timer = 5;
+let numLength = 5;
 let canPlay = true;
 let actualNumber = 0;
 inputField.value = '';
 
 const resetTimer = (number) => (timer = number || 30);
 const message = (string) => (numberText.innerText = `${string}`);
+const setMaxLength = (input, length) => input.setAttribute('maxLength', length);
 const randomInt = (length) => Math.floor(Math.random() * (9 * Math.pow(10, length - 1))) + Math.pow(10, length - 1);
 const showPopUp = (status) => (status === true ? popUpEl.classList.add('active') : popUpEl.classList.remove('active'));
 
@@ -29,24 +31,27 @@ const validateNumber = (number) => (parseInt(number) === actualNumber ? true : f
 
 const confirm = (input, button) => {
     button.addEventListener('click', () => {
+        console.log(input.value);
         if (validateNumber(input.value)) {
             showPopUp(false);
             message(`Complimenti hai vinto! Il numero da ricordare era ${actualNumber}`);
             input.value = '';
+            canPlay = true;
         } else {
             showPopUp(false);
-            message(`Hai perso! Il numero da ricordare era ${actualNumber}`);
+            message(`Hai perso! Il numero da ricordare era ${actualNumber} e tu ${input.value === '' ? 'non hai inserito nessun valore' : `hai inserito ${input.value}`}`);
             input.value = '';
+            canPlay = true;
         }
-        canPlay = true;
     });
 };
 
 startBtn.addEventListener('click', (event) => {
     if (canPlay) {
         canPlay = false;
-        actualNumber = randomInt(5);
         timerEl.classList.add('active');
+        setMaxLength(inputField, numLength);
+        actualNumber = randomInt(numLength);
         startBtn.classList.remove('active');
         numberText.innerText = actualNumber;
         timerEl.textContent = `Tempo: ${timer}`;
@@ -58,12 +63,12 @@ startBtn.addEventListener('click', (event) => {
                 message('');
                 resetTimer(5);
                 showPopUp(true);
-                clearInterval(time);
                 allowOnlyNumber(inputField);
                 confirm(inputField, confirmBtn);
                 startBtn.textContent = `Restart`;
                 startBtn.classList.add('active');
                 timerEl.classList.remove('active');
+                clearInterval(time);
             }
         }, 1000);
     }
