@@ -112,6 +112,10 @@ input[text] {
     display: flex;
 }
 
+.button.opacity {
+    background-color: #57a4f420;
+}
+
 .popup.active,
 .small-text.active {
     display: flex;

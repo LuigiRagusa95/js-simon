@@ -38,6 +38,7 @@ startBtn.addEventListener('click', () => {
         startBtn.classList.remove('active');
         numberText.innerText = actualNumber;
         timerEl.textContent = `Tempo: ${timer}`;
+        inputField.value.length !== numLength ? confirmBtn.classList.add('opacity') : confirmBtn.classList.remove('opacity');
 
         const time = setInterval(() => {
             timer--;
@@ -58,26 +59,45 @@ startBtn.addEventListener('click', () => {
 
 function fancyChecker(arr1, arr2) {
     let string = '';
+    let correct = 0;
+    let incorrect = 0;
     for (let i = 0; i < numLength; i++) {
         if (arr1[i] === arr2[i]) {
+            correct = i + 1;
             string += `<span class="t-correct">${arr2[i]}</span>`;
         } else {
+            incorrect = i + 1;
             string += `<span class="t-incorrect">${arr2[i]}</span>`;
         }
     }
-    return string;
+    return { string, correct, incorrect };
+}
+
+function giveMeTheMessage(value) {
+    if (value.correct === 0) {
+        message(`Che pessimo risultato... 0 su ${numLength}`);
+    } else if (value.correct <= 2) {
+        message(`Potevi fare di più... ne hai indovinate ${value.correct} su ${numLength}! ${value.string}`);
+    } else if (value.correct > 2 && value.correct !== numLength) {
+        message(`Mmmh...Non male come risultato!. Ne hai indovinate ${value.correct} su ${numLength}! ${value.string}`);
+    }
 }
 
 confirmBtn.addEventListener('click', () => {
     const v = fancyChecker(String(actualNumber).split(''), String(inputField.value).split(''));
+    console.log(v.correct);
     if (validateNumber(inputField.value)) {
         showPopUp(false);
-        message(`Complimenti hai vinto! Il numero da ricordare era ${v}`);
+        message(`Complimenti hai vinto! Il numero da ricordare era ${v.string}`);
         inputField.value = '';
     } else {
         showPopUp(false);
-        message(`Hai perso! Il numero da ricordare era ${actualNumber} e tu ${inputField.value === '' ? 'non hai inserito nessun valore' : `hai inserito ${v}`}`);
+        giveMeTheMessage(v);
         inputField.value = '';
     }
     canPlay = true;
+});
+
+inputField.addEventListener('input', () => {
+    inputField.value.length >= numLength ? confirmBtn.classList.remove('opacity') : confirmBtn.classList.add('opacity');
 });
