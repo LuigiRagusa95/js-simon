@@ -116,3 +116,11 @@ input[text] {
 .small-text.active {
     display: flex;
 }
+
+.t-correct {
+    color: green;
+}
+
+.t-incorrect {
+    color: red;
+}

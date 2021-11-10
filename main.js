@@ -13,11 +13,11 @@ let actualNumber = 0;
 inputField.value = '';
 
 const resetTimer = (number) => (timer = number || 30);
-const message = (string) => (numberText.innerText = `${string}`);
+const message = (string) => (numberText.innerHTML = `${string}`);
 const setMaxLength = (input, length) => input.setAttribute('maxLength', length);
+
 const randomInt = (length) => Math.floor(Math.random() * (9 * Math.pow(10, length - 1))) + Math.pow(10, length - 1);
 const showPopUp = (status) => (status === true ? popUpEl.classList.add('active') : popUpEl.classList.remove('active'));
-
 const allowOnlyNumber = (input) =>
     input.addEventListener('keydown', (event) => {
         var charCode = event.which ? event.which : event.keyCode;
@@ -56,15 +56,27 @@ startBtn.addEventListener('click', () => {
     }
 });
 
+function fancyChecker(arr1, arr2) {
+    let string = '';
+    for (let i = 0; i < numLength; i++) {
+        if (arr1[i] === arr2[i]) {
+            string += `<span class="t-correct">${arr2[i]}</span>`;
+        } else {
+            string += `<span class="t-incorrect">${arr2[i]}</span>`;
+        }
+    }
+    return string;
+}
+
 confirmBtn.addEventListener('click', () => {
-    console.log(inputField.value);
+    const v = fancyChecker(String(actualNumber).split(''), String(inputField.value).split(''));
     if (validateNumber(inputField.value)) {
         showPopUp(false);
-        message(`Complimenti hai vinto! Il numero da ricordare era ${actualNumber}`);
+        message(`Complimenti hai vinto! Il numero da ricordare era ${v}`);
         inputField.value = '';
     } else {
         showPopUp(false);
-        message(`Hai perso! Il numero da ricordare era ${actualNumber} e tu ${inputField.value === '' ? 'non hai inserito nessun valore' : `hai inserito ${inputField.value}`}`);
+        message(`Hai perso! Il numero da ricordare era ${actualNumber} e tu ${inputField.value === '' ? 'non hai inserito nessun valore' : `hai inserito ${v}`}`);
         inputField.value = '';
     }
     canPlay = true;
